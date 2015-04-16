@@ -1,5 +1,7 @@
 package us.codecraft.abc;
 
+import us.codecraft.abc.copier.BeanCopier;
+
 /**
  * @author code4crafter@gmail.com
  *         Date: 15-4-16
@@ -7,7 +9,7 @@ package us.codecraft.abc;
  */
 public abstract class BeanCopiers {
 
-	public static <A,B> BeanCopier copier(Class<A> clazzA,Class<B> clazzB){
-		return new BeanCopier();
+	public static <A,B> BeanCopier<A,B> copier(Class<A> clazzA,Class<B> clazzB){
+		return new BeanCopier(clazzA,clazzB);
 	}
 }

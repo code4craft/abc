@@ -1,5 +1,7 @@
 package us.codecraft.abc;
 
+import us.codecraft.abc.copier.BeanCopier;
+
 /**
  * @author code4crafter@gmail.com
  *         Date: 15-4-16
@@ -7,12 +9,16 @@ package us.codecraft.abc;
  */
 public class BeanTransformer<F,T> extends BeanCopier<F,T> {
 
-	@Override
-	public T copy(F f, T t) {
-		return postCopy(f, super.copy(f, t));
+	public BeanTransformer(Class<F> clazzFrom, Class<T> clazzTo) {
+		super(clazzFrom, clazzTo);
 	}
 
-	public T postCopy(F f, T t) {
+	@Override
+	public T copy(F f, T t) {
+		return doBusiness(f, super.copy(f, t));
+	}
+
+	public T doBusiness(F f, T t) {
 		return t;
 	}
 }

@@ -3,8 +3,8 @@ package us.codecraft.abc.performance;
 import jodd.bean.BeanCopy;
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
-import us.codecraft.abc.BeanCopiers;
-import us.codecraft.abc.copier.BeanCopier;
+import us.codecraft.abc.reflection.BeanCopiers;
+import us.codecraft.abc.reflection.copier.BeanCopier;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package us.codecraft.abc.common;
+package us.codecraft.abc.reflection.common;
 
 /**
  * @author yihua.huang@dianping.com

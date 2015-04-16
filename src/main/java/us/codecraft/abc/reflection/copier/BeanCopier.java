@@ -1,7 +1,7 @@
-package us.codecraft.abc.copier;
+package us.codecraft.abc.reflection.copier;
 
 import com.google.common.base.Function;
-import us.codecraft.abc.common.Pair;
+import us.codecraft.abc.reflection.common.Pair;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

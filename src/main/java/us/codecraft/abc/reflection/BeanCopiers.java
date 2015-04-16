@@ -1,6 +1,6 @@
-package us.codecraft.abc;
+package us.codecraft.abc.reflection;
 
-import us.codecraft.abc.copier.BeanCopier;
+import us.codecraft.abc.reflection.copier.BeanCopier;
 
 /**
  * @author code4crafter@gmail.com

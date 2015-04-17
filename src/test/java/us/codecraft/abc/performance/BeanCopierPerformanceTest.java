@@ -2,6 +2,8 @@ package us.codecraft.abc.performance;
 
 import jodd.bean.BeanCopy;
 import org.apache.commons.beanutils.BeanUtils;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.junit.Test;
 import us.codecraft.abc.reflection.BeanCopiers;
 import us.codecraft.abc.reflection.copier.BeanCopier;
@@ -75,10 +77,26 @@ public class BeanCopierPerformanceTest {
 		long t1 = System.currentTimeMillis();
 		for (int i=0;i<1000000;i++){
 			B b = new B();
-			BeanUtils.copyProperties(a,b);
+			BeanUtils.copyProperties(a, b);
 		}
 		long t2 = System.currentTimeMillis();
 		System.out.println("abc time takes " + (t2 - t1));
+	}
+
+	@Test
+	public void testDozerMapper() throws Exception {
+		A a = getA();
+		Mapper mapper = new DozerBeanMapper();
+		long t1 = System.currentTimeMillis();
+		for (int i=0;i<100000;i++){
+			B b = mapper.map(a, B.class);
+		}
+		long t2 = System.currentTimeMillis();
+		for (int i=0;i<1000000;i++){
+			B b = mapper.map(a, B.class);
+		}
+		long t3 = System.currentTimeMillis();
+		System.out.println("abc time takes " + (t3 - t2));
 	}
 
 	private A getA() {

@@ -16,14 +16,12 @@ import java.util.List;
 public class TwoWayCopy {
 
 	public static void main(String[] args) {
-
-//		listA = Lists.newArrayList();
-//		listB = Lists.newArrayList();
-
 		List<A> listA;
 		List<B> listB;
-		BeanCopier<A, B> beanCopier = new SimpleBeanCopier<A, B>(A.class, B.class);
+		listA = Lists.newArrayList();
+		listB = Lists.newArrayList();
 
+		BeanCopier<A, B> beanCopier = new SimpleBeanCopier<A, B>(A.class, B.class);
 		listB = Lists.transform(listA, beanCopier);
 		listA = Lists.transform(listB, beanCopier.reverse());
 	}

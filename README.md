@@ -45,12 +45,13 @@ BeanCopy是一个比较常用的操作，我也自己通过反射实现了一个
 
 ```java
 @Service
-public class A2BBeanCopier extends ConfigurableBeanCopier<A,B> {
-	
+public class A2BBeanCopier extends BeanCopier<A,B> {
+
 	@PostConstruct
 	public void init(){
 		setSourceClass(A.class);
 		setTargetClass(B.class);
+		super.init();
 	}
 
 	@Override
@@ -66,7 +67,9 @@ public class A2BBeanCopier extends ConfigurableBeanCopier<A,B> {
 一个集合的转换可以变得非常简单：
 
 ```java
-List<B> listB = Lists.transform(listA, new SimpleBeanCopier(A.class,B.class);
+BeanCopier<A, B> beanCopier = new SimpleBeanCopier<A, B>(A.class, B.class);
+listB = Lists.transform(listA, beanCopier);
+listA = Lists.transform(listB, beanCopier.reverse());
 ```
 
 ## License

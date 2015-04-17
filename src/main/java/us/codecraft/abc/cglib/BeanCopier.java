@@ -23,13 +23,29 @@ public class BeanCopier<F,T> implements Function<F,T> {
 
 	private Class<F> sourceClass;
 
-	private Function<T,F> reverse;
+	private BeanCopier<T,F> reverse;
 
-	public Function<T, F> reverse() {
+	public BeanCopier<T, F> reverse() {
 		return reverse;
 	}
 
-	public void setReverse(Function<T, F> reverse) {
+	public Function<T, F> getReverse() {
+		if (this.reverse != null) {
+			return this.reverse;
+		}
+		BeanCopier<T, F> reverse = this.reverse;
+		synchronized (this) {
+			if (reverse == null) {
+				reverse = new BeanCopier<T, F>();
+				reverse.setSourceClass(this.getTargetClass());
+				reverse.setTargetClass(this.getSourceClass());
+				reverse.init();
+			}
+		}
+		return reverse;
+	}
+
+	public void setReverse(BeanCopier<T, F> reverse) {
 		this.reverse = reverse;
 	}
 
@@ -53,8 +69,7 @@ public class BeanCopier<F,T> implements Function<F,T> {
 		return target;
 	}
 
-	@Override
-	public T apply(F input) {
+	public T copy(F input) {
 		try {
 			T o = targetClass.newInstance();
 			beanCopier.copy(input, o, null);
@@ -62,5 +77,10 @@ public class BeanCopier<F,T> implements Function<F,T> {
 		} catch (Exception e) {
 			throw new RuntimeException("create object fail, class:" + targetClass.getName() + " ", e);
 		}
+	}
+
+	@Override
+	public T apply(F input) {
+		return copy(input);
 	}
 }

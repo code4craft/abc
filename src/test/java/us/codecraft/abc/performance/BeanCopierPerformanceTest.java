@@ -92,6 +92,7 @@ public class BeanCopierPerformanceTest {
 			B b = mapper.map(a, B.class);
 		}
 		long t2 = System.currentTimeMillis();
+		System.out.println("abc time takes " + (t2 - t1));
 		for (int i=0;i<1000000;i++){
 			B b = mapper.map(a, B.class);
 		}
